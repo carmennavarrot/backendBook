@@ -6,8 +6,7 @@ const BookSchema = new mongoose.Schema({
         required: true
     },
     author: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Author',
+        type:String,
         required: true
     },
     image:{
@@ -22,7 +21,7 @@ const BookSchema = new mongoose.Schema({
     rating: {
         type: Number,
         min: 1, max: 5,
-        required: true
+        
     }
     ,
     publicationDate: {
@@ -36,7 +35,12 @@ const BookSchema = new mongoose.Schema({
     reviews: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Review'
+    }],
+    user:[{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User'
     }]
+
 });
 
 

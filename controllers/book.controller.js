@@ -5,14 +5,17 @@ const bookController = {
     // Crear un nuevo libro
     createBook: async (req, res) => {
         try {
-            const { title, author, image, publicationDate, genre } = req.body;
+            const { title, author, image,synopsis, rating, publicationDate, genre } = req.body;
 
             const nuevoLibro = new Book({
                 title,
                 author,
                 image,
+                synopsis,
+                rating,
                 publicationDate,
                 genre
+                
             });
 
             await nuevoLibro.save();
