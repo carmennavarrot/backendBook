@@ -6,7 +6,7 @@ const userController = require('../controllers/user.controller');
 const { protect, restrictTo } = require('../middlewares/auth.middleware');
 
 // Ruta para registrar un nuevo usuario
-router.post('/register', userController.register);
+router.post('/signup', userController.register);
 
 // Ruta para el inicio de sesión
 router.post('/login', userController.login);

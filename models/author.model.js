@@ -10,7 +10,12 @@ const authorSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Book',
         require:true
+    },
+    dateOfBirth: {
+        type: Date
+
     }
+
 });
 
 const Author = mongoose.model('Author', authorSchema);

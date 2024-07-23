@@ -9,7 +9,7 @@ const ReviewSchema = new mongoose.Schema({
         ref: 'Book',
         required: true
     },
-    synopsis: {
+    review: {
         type: String,
         required: true
     },

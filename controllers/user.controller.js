@@ -9,10 +9,10 @@ const userController = {
     // Registro de usuario
     register: async (req, res) => {
         try {
-            const { name, email, password } = req.body;
+            const { username, email, password } = req.body;
 
             const newUser = new User({
-                name,
+                username,
                 email,
                 password: password,
                 role: 'user'
