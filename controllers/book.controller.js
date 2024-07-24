@@ -14,7 +14,8 @@ const bookController = {
                 synopsis,
                 rating,
                 publicationDate,
-                genre
+                genre,
+                user: req.user._id,
                 
             });
 
@@ -30,7 +31,7 @@ const bookController = {
     getBookbyId: async (req, res) => {
         try {
             const { usuarioId } = req.params;
-            const libros = await Book.find({ author: usuarioId }).populate('author');
+            const libros = await Book.find({ author: usuarioId }).populate('user');
 
             res.status(200).json(libros);
         } catch (error) {
