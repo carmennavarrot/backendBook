@@ -9,7 +9,7 @@ const { protect, restrictTo, restrictToSelf } = require('../middlewares/auth.mid
 router.post('/', protect, reviewController.createReview);
 
 // Ruta para obtener todas las reseñas de un usuario específico (accesible solo para el usuario correspondiente o administradores)
-router.get('/usuario/:usuarioId', protect, restrictToSelf, restrictTo('admin', 'user'), reviewController.getReviewsByUser);
+router.get('/user/:usuarioId', protect, restrictToSelf, restrictTo('admin', 'user'), reviewController.getReviewsByUser);
 
 // Ruta para obtener una reseña específica (accesible para todos los usuarios)
 router.get('/:id', reviewController.getReview);

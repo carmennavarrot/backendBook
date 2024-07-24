@@ -9,7 +9,7 @@ const { protect, restrictTo, restrictToSelf } = require('../middlewares/auth.mid
 router.post('/', protect, bookController.createBook);
 
 // Ruta para obtener todos los libros de un usuario específico (accesible solo para el usuario correspondiente o administradores)
-router.get('/usuario/:usuarioId', protect, restrictToSelf, restrictTo('admin', 'user'), bookController.getBookbyId);
+router.get('/user/:usuarioId', protect, restrictToSelf, restrictTo('admin', 'user'), bookController.getBookbyId);
 
 // Ruta para obtener un libro específico (accesible para todos los usuarios)
 router.get('/:id', bookController.getBook);
