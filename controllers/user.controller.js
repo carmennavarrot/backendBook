@@ -72,8 +72,36 @@ const userController = {
         } catch (error) {
             res.status(500).json({ message: 'Error al obtener todos los usuarios', error: error.message });
         }
-    }
+    },
+    // Actualizar perfil del usuario
+    updateProfile: async (req, res) => {
+        try {
+            const { userId } = req.params;
+            const { name, email } = req.body;
+            const updatedUser = await User.findByIdAndUpdate(userId, { name, email }, { new: true });
 
+            if (!updatedUser) {
+                return res.status(404).json({ message: 'Usuario no encontrado' });
+            }
+
+            res.status(200).json({ message: 'Perfil actualizado con éxito', user: updatedUser });
+        } catch (error) {
+            res.status(500).json({ message: 'Error al actualizar el perfil', error: error.message });
+        }
+    }, 
+    // Eliminar usuario
+    deleteUser: async (req, res) => {
+        try {
+            const { _id } = req.params;
+            const user = await User.findByIdAndDelete(_id);
+            if (!user) {
+                return res.status(404).json({ message: 'Usuario no encontrado' });
+            }
+            res.status(200).json({ message: 'Usuario eliminado con éxito' });
+        } catch (error) {
+            res.status(500).json({ message: 'Error al eliminar el usuario', error: error.message });
+        }
+    }
 
 };
 
