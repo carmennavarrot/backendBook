@@ -9,7 +9,7 @@ const { protect, restrictTo, restrictToSelf } = require('../middlewares/auth.mid
 router.post('/', protect, bookController.createBook);
 
 // Ruta para obtener todos los libros de un usuario específico (accesible solo para el usuario correspondiente o administradores)
-router.get('/user/:usuarioId', protect, restrictToSelf, restrictTo('admin', 'user'), bookController.getBookbyId);
+router.get('/user/:id', bookController.getBookbyId);
 
 // Ruta para obtener un libro específico (accesible para todos los usuarios)
 router.get('/:id', bookController.getBook);
@@ -18,6 +18,10 @@ router.get('/:id', bookController.getBook);
 router.get('/', bookController.getAllBook);
 
 // Ruta para editar un libro (accesible solo para administradores)
-router.put('/:id', protect, restrictTo('admin'), bookController.editBook);
+router.patch('/:id', protect, restrictTo('admin'), bookController.editBook);
+
+router.delete('/:id', protect, restrictToSelf, restrictTo('admin'), bookController.deleteBook);
+
+router.put('/:userId/:id', protect, restrictTo('admin'),bookController.editBook);
 
 module.exports = router;

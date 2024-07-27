@@ -42,7 +42,7 @@ const userController = {
             }
 
             const token = jwt.sign({ userId: user._id }, JWT_SECRET, { expiresIn: JWT_EXPIRES_IN });
-            res.status(200).json({ message: 'Login exitoso', token , id: user._id, role: user.role});
+            res.status(200).json({ message: 'Login exitoso', token , id: user._id, role: user.role , username: user.username, email: user.email});
         } catch (error) {
             res.status(500).json({ message: 'Error en el login', error: error.message });
         }

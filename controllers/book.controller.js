@@ -21,21 +21,21 @@ const bookController = {
 
             await nuevoLibro.save();
 
-            res.status(201).json({ message: 'Libro creado exitosamente', libro: nuevoLibro });
+           return res.status(201).json({ message: 'Libro creado exitosamente', libro: nuevoLibro });
         } catch (error) {
-            res.status(500).json({ message: 'Error al crear el libro', error: error.message });
+           return res.status(500).json({ message: 'Error al crear el libro', error: error.message });
         }
     },
 
     // Obtener libros por usuario
     getBookbyId: async (req, res) => {
         try {
-            const { usuarioId } = req.params;
-            const libros = await Book.find({ user: usuarioId }).populate('user');
+            const { id } = req.params;
+            const libros = await Book.find({ user: id }).populate('user');
 
-            res.status(200).json(libros);
+           return res.status(200).json(libros);
         } catch (error) {
-            res.status(500).json({ message: 'Error al obtener los libros', error: error.message });
+           return res.status(500).json({ message: 'Error al obtener los libros', error: error.message });
         }
     },
 
@@ -49,9 +49,9 @@ const bookController = {
                 return res.status(404).json({ message: 'Libro no encontrado' });
             }
 
-            res.status(200).json(libro);
+           return res.status(200).json(libro);
         } catch (error) {
-            res.status(500).json({ message: 'Error al obtener el libro', error: error.message });
+           return res.status(500).json({ message: 'Error al obtener el libro', error: error.message });
         }
     },
 
@@ -59,9 +59,9 @@ const bookController = {
     getAllBook: async (req, res) => {
         try {
             const libros = await Book.find().populate('author reviews');
-            res.status(200).json(libros);
+           return res.status(200).json(libros);
         } catch (error) {
-            res.status(500).json({ message: 'Error al obtener los libros', error: error.message });
+           return res.status(500).json({ message: 'Error al obtener los libros', error: error.message });
         }
     },
 
@@ -69,11 +69,11 @@ const bookController = {
     editBook: async (req, res) => {
         try {
             const { id } = req.params;
-            const { title, author, image, publicationDate, genre } = req.body;
+            const { title, author, image,synopsis, publicationDate, genre } = req.body;
 
             const libroActualizado = await Book.findByIdAndUpdate(
                 id,
-                { title, author, image, publicationDate, genre },
+                { title, author, image,synopsis, publicationDate, genre },
                 { new: true }
             );
 
@@ -81,11 +81,28 @@ const bookController = {
                 return res.status(404).json({ message: 'Libro no encontrado' });
             }
 
-            res.status(200).json({ message: 'Libro actualizado exitosamente', libro: libroActualizado });
+           return res.status(200).json({ message: 'Libro actualizado exitosamente', libro: libroActualizado });
         } catch (error) {
-            res.status(500).json({ message: 'Error al actualizar el libro', error: error.message });
+          return  res.status(500).json({ message: 'Error al actualizar el libro', error: error.message });
         }
-    }
+    },
+    // eliminar
+    deleteBook: async (req, res) => {
+        try {
+            const { id } = req.params;
+            const deleteBook = await Book.findByIdAndDelete(id);
+            if (!deleteBook) {
+                return res.status(404).json({ message: 'Libro no encontrado' });
+            }
+
+           return res.status(200).json({ message: 'Book cancelled successfully' });
+        } catch (error) {
+          return  res.status(500).json({ message: 'Error al borrar', error: error.message });
+        }
+    },
+
+
+
 };
 
 module.exports = bookController;

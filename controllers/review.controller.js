@@ -6,23 +6,25 @@ const reviewController = {
       // Crear una nueva reseña
     createReview: async (req, res) => {
         try {
-            const { book, text, rating } = req.body;
+            const {  review, rating } = req.body;
+            const { bookId } = req.params
+console.log(review)
 
             const newReview = new Review({
                 user: req.user._id,
-                book,
-                text,
-                rating
+                book: bookId,
+                review: review,
+                rating: rating
             });
-
+console.log(newReview)
             await newReview.save();
 
             // Actualizar el libro con la nueva reseña
-            await Book.findByIdAndUpdate(book, { $push: { reviews: newReview._id } });
+            await Book.findByIdAndUpdate(bookId, { $push: { reviews: newReview._id } });
 
-            res.status(201).json({ message: 'Review created successfully', review: newReview });
+             return res.status(201).json({ message: 'Review created successfully', review: newReview });
         } catch (error) {
-            res.status(500).json({ message: 'Error creating review', error: error.message });
+           return res.status(500).json({ message: 'Error creating review', error: error.message });
         }
     },
 
@@ -32,9 +34,10 @@ const reviewController = {
             const { userId } = req.params;
             const reviews = await Review.find({ user: userId }).populate('book');
 
-            res.status(200).json(reviews);
+          return  res.status(200).json(reviews);
+        
         } catch (error) {
-            res.status(500).json({ message: 'Error retrieving reviews', error: error.message });
+             return res.status(500).json({ message: 'Error retrieving reviews', error: error.message });
         }
     },
 
@@ -75,10 +78,10 @@ const reviewController = {
         }
     },
 
-    //// Obtener todas las reseñas
+    // Obtener todas las reseñas
     getAllReviews: async (req, res) => {
         try {
-            const reviews = await Review.find().populate('user book');
+            const reviews = await Review.find().populate('book').populate('user');
             res.status(200).json(reviews);
         } catch (error) {
             res.status(500).json({ message: 'Error retrieving all reviews', error: error.message });
