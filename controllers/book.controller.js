@@ -1,4 +1,5 @@
 const Book = require('../models/book.model');
+const Review = require('../models/review.model');
 const User = require('../models/user.model');
 
 const bookController = {
@@ -30,8 +31,8 @@ const bookController = {
     // Obtener libros por usuario
     getBookbyId: async (req, res) => {
         try {
-            const { id } = req.params;
-            const libros = await Book.find({ user: id }).populate('user');
+            const { _id } = req.params;
+            const libros = await Book.find({ user: _id }).populate('user');
 
            return res.status(200).json(libros);
         } catch (error) {
@@ -43,7 +44,7 @@ const bookController = {
     getBook: async (req, res) => {
         try {
             const { id } = req.params;
-            const libro = await Book.findById(id).populate('author reviews');
+            const libro = await Book.findById(id).populate('author');
 
             if (!libro) {
                 return res.status(404).json({ message: 'Libro no encontrado' });
@@ -94,7 +95,7 @@ const bookController = {
             if (!deleteBook) {
                 return res.status(404).json({ message: 'Libro no encontrado' });
             }
-
+await Review.deleteMany({book: id})
            return res.status(200).json({ message: 'Book cancelled successfully' });
         } catch (error) {
           return  res.status(500).json({ message: 'Error al borrar', error: error.message });
