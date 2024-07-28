@@ -7,12 +7,12 @@ const reviewController = {
     createReview: async (req, res) => {
         try {
             const {  review, rating } = req.body;
-            const { book_Id } = req.params
+            const { bookId } = req.params
 console.log(review)
 
             const newReview = new Review({
                 user: req.user._id,
-                book: book_Id,
+                book: bookId,
                 review: review,
                 rating: rating
             });
@@ -20,7 +20,7 @@ console.log(newReview)
             await newReview.save();
 
             // Actualizar el libro con la nueva reseña
-            await Book.findByIdAndUpdate(book_Id, { $push: { reviews: newReview._id } });
+            await Book.findByIdAndUpdate(bookId, { $push: { reviews: newReview._id } });
 
              return res.status(201).json({ message: 'Review created successfully', review: newReview });
         } catch (error) {
@@ -85,6 +85,20 @@ console.log(newReview)
             res.status(200).json(reviews);
         } catch (error) {
             res.status(500).json({ message: 'Error retrieving all reviews', error: error.message });
+        }
+    },
+    getBookReviews: async (req, res) => {
+        try {
+            const { bookId } = req.params;
+            const reviews = await Review.find({ book: bookId }).populate('user');
+
+            if (reviews.length === 0) {
+                return res.status(404).json({ message: 'No reviews found for this book' });
+            }
+
+            res.status(200).json(reviews);
+        } catch (error) {
+            res.status(500).json({ message: 'Error retrieving book reviews', error: error.message });
         }
     }
   

@@ -20,5 +20,8 @@ router.get('/', reviewController.getAllReviews);
 // Ruta para eliminar una reseña (accesible solo para el usuario correspondiente o administradores)
 router.delete('/:id', protect, restrictToSelf, restrictTo('admin', 'user'), reviewController.deleteReview);
 
+// Ruta para obtener todas las reseñas de un libro específico (accesible para todos los usuarios)
+router.get('/book/:bookId', reviewController.getBookReviews);
+
 module.exports = router;
 

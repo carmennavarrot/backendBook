@@ -31,8 +31,8 @@ const bookController = {
     // Obtener libros por usuario
     getBookbyId: async (req, res) => {
         try {
-            const { _id } = req.params;
-            const libros = await Book.find({ user: _id }).populate('user');
+            const { id } = req.params;
+            const libros = await Book.find({ user: id }).populate('user');
 
            return res.status(200).json(libros);
         } catch (error) {
