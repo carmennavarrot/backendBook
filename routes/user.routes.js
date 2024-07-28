@@ -19,10 +19,10 @@ router.patch('/update/:userId', protect, userController.updateProfile);
 router.get('/', protect, restrictTo('admin'), userController.getAllUsers);
 
 // Ruta para eliminar un usuario (solo admin)
-router.delete('/delete/:id', protect, restrictTo('admin'), userController.deleteUser);
+router.delete('/:id', protect, restrictTo('admin'), userController.deleteUser);
 
 // Ruta para actualizar el perfil de usuario
-router.patch('/update/:userId', protect, restrictToSelf, userController.updateProfile);
+router.patch('/:userId', protect, restrictToSelf, userController.updateProfile);
 
 
 module.exports = router;
