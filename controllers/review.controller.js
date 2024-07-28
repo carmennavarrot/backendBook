@@ -86,6 +86,20 @@ console.log(newReview)
         } catch (error) {
             res.status(500).json({ message: 'Error retrieving all reviews', error: error.message });
         }
+    },
+    getBookReviews: async (req, res) => {
+        try {
+            const { bookId } = req.params;
+            const reviews = await Review.find({ book: bookId }).populate('user');
+
+            if (reviews.length === 0) {
+                return res.status(404).json({ message: 'No reviews found for this book' });
+            }
+
+            res.status(200).json(reviews);
+        } catch (error) {
+            res.status(500).json({ message: 'Error retrieving book reviews', error: error.message });
+        }
     }
   
 };
