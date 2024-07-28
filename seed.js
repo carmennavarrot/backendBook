@@ -21,14 +21,14 @@ const users = [
 ];
 
 const authors = [
-    { _id: new mongoose.Types.ObjectId(), name: "George Orwell", books: ["1984", "Rebelión en la granja"], dateOfBirth: new Date("1903-06-25") },
-    { _id: new mongoose.Types.ObjectId(), name: "J.K. Rowling", books: ["Harry Potter y la piedra filosofal", "Harry Potter y la cámara secreta", "Harry Potter y el prisionero de Azkaban"], dateOfBirth: new Date("1965-07-31") },
-    { _id: new mongoose.Types.ObjectId(), name: "Harper Lee", books: ["Matar a un ruiseñor"], dateOfBirth: new Date("1926-04-28") },
-    { _id: new mongoose.Types.ObjectId(), name: "J.D. Salinger", books: ["El guardián entre el centeno"], dateOfBirth: new Date("1919-01-01") },
-    { _id: new mongoose.Types.ObjectId(), name: "Jane Austen", books: ["Orgullo y prejuicio", "Sentido y sensibilidad", "Emma"], dateOfBirth: new Date("1775-12-16") },
-    { _id: new mongoose.Types.ObjectId(), name: "F. Scott Fitzgerald", books: ["El gran Gatsby"], dateOfBirth: new Date("1896-09-24") },
-    { _id: new mongoose.Types.ObjectId(), name: "Herman Melville", books: ["Moby-Dick"], dateOfBirth: new Date("1819-08-01") },
-    { _id: new mongoose.Types.ObjectId(), name: "Leo Tolstoy", books: ["Guerra y paz", "Anna Karénina"], dateOfBirth: new Date("1828-09-09") }
+    // { _id: new mongoose.Types.ObjectId(), name: "George Orwell", books: ["1984", "Rebelión en la granja"], dateOfBirth: new Date("1903-06-25") },
+    // { _id: new mongoose.Types.ObjectId(), name: "J.K. Rowling", books: ["Harry Potter y la piedra filosofal", "Harry Potter y la cámara secreta", "Harry Potter y el prisionero de Azkaban"], dateOfBirth: new Date("1965-07-31") },
+    // { _id: new mongoose.Types.ObjectId(), name: "Harper Lee", books: ["Matar a un ruiseñor"], dateOfBirth: new Date("1926-04-28") },
+    // { _id: new mongoose.Types.ObjectId(), name: "J.D. Salinger", books: ["El guardián entre el centeno"], dateOfBirth: new Date("1919-01-01") },
+    // { _id: new mongoose.Types.ObjectId(), name: "Jane Austen", books: ["Orgullo y prejuicio", "Sentido y sensibilidad", "Emma"], dateOfBirth: new Date("1775-12-16") },
+    // { _id: new mongoose.Types.ObjectId(), name: "F. Scott Fitzgerald", books: ["El gran Gatsby"], dateOfBirth: new Date("1896-09-24") },
+    // { _id: new mongoose.Types.ObjectId(), name: "Herman Melville", books: ["Moby-Dick"], dateOfBirth: new Date("1819-08-01") },
+    // { _id: new mongoose.Types.ObjectId(), name: "Leo Tolstoy", books: ["Guerra y paz", "Anna Karénina"], dateOfBirth: new Date("1828-09-09") }
 ];
 
 
@@ -36,101 +36,111 @@ const books = [
     { 
         _id: new mongoose.Types.ObjectId(), 
         title: "1984", 
-        author: authors[0]._id, 
+        author:  "George Orwell", 
         image: "https://images-na.ssl-images-amazon.com/images/I/71kxa1-0mfL.jpg", 
         synopsis: "Una novela distópica sobre un régimen totalitario que utiliza la vigilancia, la censura y la represión para mantener su poder.", 
         rating: 4.5, 
-        publicationDate: new Date("1949"), 
+        publicationDate: "1949", 
         genre: "Distopía", 
-        reviews: [] 
+        reviews: [] ,
+        user: users[0]._id
+
     },
     { 
         _id: new mongoose.Types.ObjectId(), 
         title: "Harry Potter y la piedra filosofal", 
-        author: authors[1]._id, 
+        author:  "J.K. Rowling", 
         image: "https://images-na.ssl-images-amazon.com/images/I/81YOuOGFCJL.jpg", 
         synopsis: "La primera novela de la serie Harry Potter, que sigue las aventuras del joven mago Harry Potter en su primer año en Hogwarts.", 
         rating: 5, 
-        publicationDate: new Date("1997"), 
+        publicationDate: "1997", 
         genre: "Fantasía", 
-        reviews: [] 
+        reviews: [] ,
+        user: users[0]._id
     },
     { 
         _id: new mongoose.Types.ObjectId(), 
         title: "Matar a un ruiseñor", 
-        author: authors[2]._id, 
+        author: "Harper Lee", 
         image: "https://m.media-amazon.com/images/I/51fYOnj6NnL._SY445_SX342_.jpg", 
         synopsis: "Una novela sobre la injusticia racial en el sur de los Estados Unidos, vista a través de los ojos de una niña.", 
         rating: 4.7, 
-        publicationDate: new Date("1960"), 
+        publicationDate: "1960", 
         genre: "Ficción", 
-        reviews: [] 
+        reviews: [] ,
+        user: users[0]._id
     },
     { 
         _id: new mongoose.Types.ObjectId(), 
         title: "Rebelión en la granja", 
-        author: authors[0]._id, 
+        author: "George Orwell", 
         image: "https://images-na.ssl-images-amazon.com/images/I/81vpsIs58WL.jpg", 
         synopsis: "Una sátira política sobre una granja donde los animales se rebelan contra sus dueños humanos, solo para ser traicionados por sus propios líderes.", 
         rating: 4.3, 
-        publicationDate: new Date("1945"), 
+        publicationDate: "1945", 
         genre: "Sátira política", 
-        reviews: [] 
+        reviews: [] ,
+        user: users[0]._id
     },
     { 
         _id: new mongoose.Types.ObjectId(), 
         title: "El guardián entre el centeno", 
-        author: authors[3]._id, 
+        author: "J.D. Salinger", 
         image: "https://images-na.ssl-images-amazon.com/images/I/81OthjkJBuL.jpg", 
         synopsis: "La historia de un adolescente rebelde que se escapa de su internado y recorre Nueva York mientras reflexiona sobre la vida y la sociedad.", 
         rating: 4.1, 
-        publicationDate: new Date("1951"), 
+        publicationDate: "1951", 
         genre: "Ficción", 
-        reviews: [] 
+        reviews: [] ,
+        user: users[0]._id
     },
     { 
         _id: new mongoose.Types.ObjectId(), 
         title: "Orgullo y prejuicio", 
-        author: authors[4]._id, 
+        author: "Jane Austen", 
         image: "https://m.media-amazon.com/images/I/519+aaVc4rL._SY445_SX342_.jpg", 
         synopsis: "Una novela romántica que sigue la vida de Elizabeth Bennet mientras lidia con cuestiones de moralidad, educación y matrimonio en la sociedad británica de principios del siglo XIX.", 
         rating: 4.8, 
-        publicationDate: new Date("1813"), 
+        publicationDate: "1813", 
         genre: "Romance", 
-        reviews: [] 
+        reviews: [],
+        user: users[0]._id 
     },
     { 
         _id: new mongoose.Types.ObjectId(), 
         title: "El gran Gatsby", 
-        author: authors[5]._id, 
+        author: "F. Scott Fitzgerald", 
         image: "https://m.media-amazon.com/images/I/61KOdBZ6IWL._SY445_SX342_.jpg", 
         synopsis: "Una historia trágica sobre el sueño americano, centrada en el misterioso millonario Jay Gatsby y su amor por Daisy Buchanan.", 
         rating: 4.4, 
-        publicationDate: new Date("1925"), 
+        publicationDate:"1925", 
         genre: "Tragedia", 
-        reviews: [] 
+        reviews: [] ,
+        user: users[0]._id
     },
     { 
         _id: new mongoose.Types.ObjectId(), 
         title: "Moby-Dick", 
-        author: authors[6]._id, 
+        author:  "Herman Melville", 
         image: "https://m.media-amazon.com/images/I/51EPkbs4CNL._SY445_SX342_.jpg", 
         synopsis: "La epopeya de la caza del gran cachalote blanco, Moby Dick, liderada por el capitán Ahab, obsesionado con la venganza.", 
         rating: 4.2, 
-        publicationDate: new Date("1851"), 
+        publicationDate:"1851", 
         genre: "Aventura", 
-        reviews: [] 
+        reviews: [] ,
+        user: users[0]._id
     },
     { 
         _id: new mongoose.Types.ObjectId(), 
         title: "Guerra y paz", 
-        author: authors[7]._id, 
+        author: "Leo Tolstoy", 
         image: "https://m.media-amazon.com/images/I/91VQkzNt-gL._SY466_.jpg", 
         synopsis: "Una extensa novela histórica que narra la historia de varias familias aristocráticas rusas durante las guerras napoleónicas.", 
         rating: 4.9, 
-        publicationDate: new Date("1869"), 
+        publicationDate:"1869", 
         genre: "Ficción histórica", 
-        reviews: [] 
+        reviews: [] ,
+        user: users[0]._id
     }
 ];
 
