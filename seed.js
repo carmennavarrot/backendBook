@@ -40,7 +40,7 @@ const books = [
         image: "https://images-na.ssl-images-amazon.com/images/I/71kxa1-0mfL.jpg", 
         synopsis: "Una novela distópica sobre un régimen totalitario que utiliza la vigilancia, la censura y la represión para mantener su poder.", 
         rating: 4.5, 
-        publicationDate: 1949, 
+        publicationDate: 1949,
         genre: "Distopía", 
         reviews: [],
         user: users[3]._id 
